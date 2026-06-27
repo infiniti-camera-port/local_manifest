@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  infiniti camera-port local manifest.
+
+  Drop this file into .repo/local_manifests/ after `repo init` from
+  oneplus-sm8850-development/android, then run `repo sync`.
+
+  Re-points the camera stack at the infiniti-camera-port org. The camera bring-up
+  has landed on each repo's default branch, so the revisions below track those.
+-->
+<manifest>
+
+  <!-- frameworks -->
+  <remove-project name="LineageOS/android_frameworks_av" />
+  <project path="frameworks/av" name="infiniti-camera-port/android_frameworks_av"
+           remote="github" revision="A16" groups="pdk,sysui-studio" />
+
+  <remove-project name="LineageOS/android_frameworks_base" />
+  <project path="frameworks/base" name="infiniti-camera-port/android_frameworks_base"
+           remote="github" revision="lineage-23.2" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
+
+  <remove-project name="LineageOS/android_frameworks_native" />
+  <project path="frameworks/native" name="infiniti-camera-port/android_frameworks_native"
+           remote="github" revision="lineage-23.2" groups="pdk" />
+
+  <!-- sepolicy (sm8850 vendor) -->
+  <remove-project name="OnePlus-SM8850-Development/android_device_qcom_sepolicy_vndr" />
+  <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
+           remote="github" revision="lineage-23.2-caf-sm8850" groups="qcom,kaanapali-vendor" />
+
+  <!-- device trees + hardware -->
+  <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_infiniti" />
+  <project path="device/oneplus/infiniti" name="infiniti-camera-port/android_device_oneplus_infiniti"
+           remote="github" revision="lineage-23.2" />
+
+  <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_sm8850-common" />
+  <project path="device/oneplus/sm8850-common" name="infiniti-camera-port/android_device_oneplus_sm8850-common"
+           remote="github" revision="lineage-23.2-infiniti" />
+
+  <remove-project name="OnePlus-SM8850-Development/android_hardware_oplus" />
+  <project path="hardware/oplus" name="infiniti-camera-port/android_hardware_oplus"
+           remote="github" revision="A16" />
+
+  <!-- proprietary blobs (camera blobs landed via extraction) -->
+  <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_infiniti" />
+  <project path="vendor/oneplus/infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_infiniti"
+           remote="github" revision="lineage-23.2" />
+
+  <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_sm8850-common" />
+  <project path="vendor/oneplus/sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_sm8850-common"
+           remote="github" revision="lineage-23.2-infiniti" />
+
+  <!-- oplus camera vendor (not in the base manifest; added) -->
+  <project path="vendor/oplus/camera" name="infiniti-camera-port/vendor_oplus_camera"
+           remote="github" revision="A16" />
+
+</manifest>
