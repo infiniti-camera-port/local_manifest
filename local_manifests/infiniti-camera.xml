@@ -5,8 +5,11 @@
   Drop this file into .repo/local_manifests/ after `repo init` from
   oneplus-sm8850-development/android, then run `repo sync`.
 
-  Re-points the camera stack at the infiniti-camera-port org. The camera bring-up
-  has landed on each repo's default branch, so the revisions below track those.
+  Re-points the camera stack at the infiniti-camera-port org.
+
+  v3.1 release: five projects track their staging/*-v3.1 fix branches (DV recording,
+  live-photo engagement + manifestation, gallery OLive gate). frameworks/av stays on
+  A16 (already carries the 'oplu' udta patch). See BUILD-LOG for the overlay ledger.
 -->
 <manifest>
 
