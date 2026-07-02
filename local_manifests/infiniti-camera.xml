@@ -16,6 +16,17 @@
            remote="github" revision="A16" groups="pdk,sysui-studio" />
 
   <remove-project name="LineageOS/android_frameworks_base" />
+  <!--
+    frameworks/base tracks the promoted default (lineage-23.2). The OP15InfinityX
+    reconciliation review branch is staging/infinityx = default + 3 PROVEN Oplus
+    access-control commits only (OplusAccessControlManagerService + StateStore +
+    security-permission hooks). The AppLock / AxSandbox / private-space wave was
+    INTENTIONALLY DROPPED (Option C, 2026-07-01): it has no camera/gallery consumer
+    (OEM-apk dex scan = zero refs), its window-enforcement call sites were never
+    ported (inert on-screen), and it is unproven on LOS (no compile/boot). Preserved
+    on branch backup/axsandbox-wave-20260701 for a possible future crdroid base-swap
+    or dedicated AppLock effort. See .omo/evidence/op15infinityx/axsandbox-containment-brainstorm.md.
+  -->
   <project path="frameworks/base" name="infiniti-camera-port/android_frameworks_base"
            remote="github" revision="lineage-23.2" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
 
