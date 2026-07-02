@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  infiniti camera-port local manifest.
+  infiniti camera-port local manifest — staging/infinityx (v3.4 TEST build).
 
   Drop this file into .repo/local_manifests/ after `repo init` from
   oneplus-sm8850-development/android, then run `repo sync`.
 
   Re-points the camera stack at the infiniti-camera-port org.
 
-  v3.1 release: five projects track their staging/*-v3.1 fix branches (DV recording,
-  live-photo engagement + manifestation, gallery OLive gate). frameworks/av stays on
-  A16 (already carries the 'oplu' udta patch). See BUILD-LOG for the overlay ledger.
+  THIS BRANCH (staging/infinityx) points the six reconciled repos at their
+  staging/infinityx review branches so the build server can build v3.4 from the
+  OP15InfinityX whole-next reconciliation BEFORE promotion. After v3.4 validates,
+  promote the staged branches onto the default branches and switch this manifest
+  back to `main` (which tracks defaults: A16 / lineage-23.2 / lineage-23.2-infiniti).
+
+  Unchanged repos (frameworks/av, sepolicy_vndr, both proprietary_vendor) have no
+  staging/infinityx branch and stay on their defaults.
+
+  NOTE: AI Unit is NOT yet a branch (feasibility only — see
+  .omo/evidence/op15infinityx/aiunit-feasibility.md). When a staging/infinityx-aiunit
+  (or stacked) branch exists it gets added here for the v3.4 test build.
 -->
 <manifest>
 
@@ -19,14 +28,23 @@
            remote="github" revision="A16" groups="pdk,sysui-studio" />
 
   <remove-project name="LineageOS/android_frameworks_base" />
+  <!--
+    frameworks/base staging/infinityx = default (lineage-23.2) + 3 PROVEN Oplus
+    access-control commits ONLY. The AppLock / AxSandbox / private-space wave was
+    intentionally DROPPED (Option C, 2026-07-01): no camera/gallery consumer (OEM-apk
+    dex scan = 0 refs), enforcement call sites never ported (inert on-screen), unproven
+    on LOS; and it would collide with a future crDroid App Lock (same surface). Preserved
+    on branch backup/axsandbox-wave-20260701. See
+    .omo/evidence/op15infinityx/axsandbox-containment-brainstorm.md.
+  -->
   <project path="frameworks/base" name="infiniti-camera-port/android_frameworks_base"
-           remote="github" revision="lineage-23.2" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
+           remote="github" revision="staging/infinityx" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
 
   <remove-project name="LineageOS/android_frameworks_native" />
   <project path="frameworks/native" name="infiniti-camera-port/android_frameworks_native"
-           remote="github" revision="lineage-23.2" groups="pdk" />
+           remote="github" revision="staging/infinityx" groups="pdk" />
 
-  <!-- sepolicy (sm8850 vendor) -->
+  <!-- sepolicy (sm8850 vendor) — unchanged, stays on default -->
   <remove-project name="OnePlus-SM8850-Development/android_device_qcom_sepolicy_vndr" />
   <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
            remote="github" revision="lineage-23.2-caf-sm8850" groups="qcom,kaanapali-vendor" />
@@ -34,17 +52,17 @@
   <!-- device trees + hardware -->
   <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_infiniti" />
   <project path="device/oneplus/infiniti" name="infiniti-camera-port/android_device_oneplus_infiniti"
-           remote="github" revision="lineage-23.2" />
+           remote="github" revision="staging/infinityx" />
 
   <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_sm8850-common" />
   <project path="device/oneplus/sm8850-common" name="infiniti-camera-port/android_device_oneplus_sm8850-common"
-           remote="github" revision="lineage-23.2-infiniti" />
+           remote="github" revision="staging/infinityx" />
 
   <remove-project name="OnePlus-SM8850-Development/android_hardware_oplus" />
   <project path="hardware/oplus" name="infiniti-camera-port/android_hardware_oplus"
-           remote="github" revision="A16" />
+           remote="github" revision="staging/infinityx" />
 
-  <!-- proprietary blobs (camera blobs landed via extraction) -->
+  <!-- proprietary blobs (camera blobs landed via extraction) — unchanged, stay on default -->
   <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_infiniti" />
   <project path="vendor/oneplus/infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_infiniti"
            remote="github" revision="lineage-23.2" />
@@ -55,6 +73,6 @@
 
   <!-- oplus camera vendor (not in the base manifest; added) -->
   <project path="vendor/oplus/camera" name="infiniti-camera-port/vendor_oplus_camera"
-           remote="github" revision="A16" />
+           remote="github" revision="staging/infinityx" />
 
 </manifest>
