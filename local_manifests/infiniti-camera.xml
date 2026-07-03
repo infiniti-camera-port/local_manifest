@@ -23,7 +23,7 @@
     vendor_oplus_camera                      ab98365740538dcef33ec9ff62bc2eae91bde8ba
 
   Non-matrix closure provenance:
-    kernel/oneplus/sm8850            crdroidandroid @ 16.0 (official crDroid lineage.dependencies)
+    kernel/oneplus/sm8850            kernel/common (AOSP GKI) @ android16-6.12-lts (UAPI header source for generated_kernel_includes; mirrors lineage-infiniti). Was crdroidandroid @ 16.0 = a PREBUILT kernel repo (no Makefile) -> `make headers_install` failed the build.
     device/oneplus/infiniti-kernel   OnePlus-SM8850-Development @ lineage-23.2 (lineage-infiniti working manifest; prebuilts referenced by current device trees)
     hardware/qcom-caf/sm8850/audio/primary-hal  OnePlus-SM8850-Development audio-ar @ lineage-23.2-caf-sm8850 (lineage-infiniti working manifest)
     hardware/qcom-caf/common         OnePlus-SM8850-Development fork @ lineage-23.2 (= LineageOS + 3 kaanapali board-def commits) + sm8850 os_pickup linkfile
@@ -87,9 +87,16 @@
 
   <!-- ==== non-matrix sm8850 device closure ==== -->
 
-  <!-- kernel source (official crDroid device dep; devicetrees/modules deps are dangling and excluded) -->
-  <project path="kernel/oneplus/sm8850" name="crdroidandroid/android_kernel_oneplus_sm8850"
-           remote="github" revision="refs/heads/16.0" clone-depth="1" />
+  <!-- kernel source: AOSP GKI common (android16-6.12-lts). device/oneplus/sm8850-common sets
+       TARGET_KERNEL_SOURCE := kernel/oneplus/sm8850 unconditionally; under USE_PREBUILT_KERNEL it
+       is used ONLY by vendor/lineage's generated_kernel_includes genrule (make -C ... headers_install),
+       consumed by the oplus fingerprint HAL. The crdroidandroid/android_kernel_oneplus_sm8850 repo is
+       PREBUILT-layout (BoardConfig.mk + images/ + modules/, no Makefile) so headers_install has no rule
+       and the build failed at 43%. Point this at the AOSP GKI source (has a real Makefile + UAPI headers),
+       exactly as the proven lineage-infiniti tree does. The boot kernel image + modules still come from
+       device/oneplus/infiniti-kernel (TARGET_NO_KERNEL_OVERRIDE=true; we do not build the kernel). -->
+  <project path="kernel/oneplus/sm8850" name="kernel/common"
+           remote="aosp" revision="android16-6.12-lts" clone-depth="1" />
 
   <!-- kernel prebuilts referenced by the current device trees -->
   <project path="device/oneplus/infiniti-kernel" name="OnePlus-SM8850-Development/android_device_oneplus_infiniti-kernel"
