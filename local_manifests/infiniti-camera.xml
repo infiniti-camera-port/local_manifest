@@ -61,14 +61,6 @@
   <project path="build/soong" name="infiniti-camera-port/android_build_soong"
            remote="github" revision="staging/16.0_crdroid" groups="pdk,sysui-studio,tradefed" />
 
-  <!-- SettingsIntelligence: accept a package-qualified androidx.preference.PreferenceScreen
-       root in search indexing. OppoGallery2's GallerySearchIndexablesProvider declares the
-       qualified root; AOSP's strict parser throws and crashes com.android.settings.intelligence
-       on every indexing pass (Settings "Suggestions" crash). Fork = crdroid base + 1 commit. -->
-  <remove-project name="crdroidandroid/android_packages_apps_SettingsIntelligence" />
-  <project path="packages/apps/SettingsIntelligence" name="infiniti-camera-port/android_packages_apps_SettingsIntelligence"
-           remote="github" revision="staging/16.0_crdroid" groups="pdk-fs" />
-
   <!-- sepolicy (sm8850 vendor; no base-manifest owner) -->
   <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
            remote="github" revision="staging/16.0_crdroid" groups="kaanapali-vendor,qcom" />
