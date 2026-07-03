@@ -53,6 +53,14 @@
   <project path="frameworks/native" name="infiniti-camera-port/android_frameworks_native"
            remote="github" revision="staging/16.0_crdroid" groups="pdk" />
 
+  <!-- build/soong: boot-jars-package-check allow-list fix — oplus-fwk.jar carries OEM
+       stub pkgs com.coloros.deepthinker / com.itgsa.opensdk.wm / com.oplusx.* (task-9
+       class-closure) not on the crDroid base bootclasspath allow list. Fork = base pin
+       8b0eaec6e + 1 commit adding the 3 patterns (mirrors lineage-infiniti v3.3). -->
+  <remove-project name="crdroidandroid/android_build_soong" />
+  <project path="build/soong" name="infiniti-camera-port/android_build_soong"
+           remote="github" revision="staging/16.0_crdroid" groups="pdk,sysui-studio,tradefed" />
+
   <!-- sepolicy (sm8850 vendor; no base-manifest owner) -->
   <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
            remote="github" revision="staging/16.0_crdroid" groups="kaanapali-vendor,qcom" />
