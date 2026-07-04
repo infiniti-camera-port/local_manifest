@@ -61,6 +61,14 @@
   <project path="build/soong" name="infiniti-camera-port/android_build_soong"
            remote="github" revision="staging/16.0_crdroid" groups="pdk,sysui-studio,tradefed" />
 
+  <!-- SettingsIntelligence: tolerant parser — accept a package-qualified
+       androidx.preference.PreferenceScreen root. The Settings-search indexer crashes on
+       org.lineageos.lineageparts (crDroidParts), NOT the gallery (bd33 misidentified); the
+       platform fork handles that + any provider. Fork = crdroid base + 1 commit (c6f3a89). -->
+  <remove-project name="crdroidandroid/android_packages_apps_SettingsIntelligence" />
+  <project path="packages/apps/SettingsIntelligence" name="infiniti-camera-port/android_packages_apps_SettingsIntelligence"
+           remote="github" revision="staging/16.0_crdroid" groups="pdk-fs" />
+
   <!-- sepolicy (sm8850 vendor; no base-manifest owner) -->
   <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
            remote="github" revision="staging/16.0_crdroid" groups="kaanapali-vendor,qcom" />
