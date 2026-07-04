@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   infiniti camera-port local manifest — crDroid 16.0 composition (2026-07-03).
+  Lane A RE-ARCH overlay (staging/16.0_crdroid-rearch branch of this repo):
+  vendor_oplus_camera is retired from the crDroid line and its glue/payload
+  migrated into device/oneplus/{sm8850-common,infiniti}-camera (@ -rearch) +
+  the payload shell vendor/oneplus/infiniti-camera. The base-branch
+  infiniti-camera.xml (staging/16.0_crdroid) still references vendor_oplus_camera
+  and keeps reproducing v12.11 for the byte-identity baseline.
 
   Drop this file into .repo/local_manifests/ after `repo init` from
   crdroidandroid/android @ 16.0, then run `repo sync`.
 
   Adds the complete OnePlus 15 (infiniti, sm8850/kaanapali) device closure
   on top of the crDroid base manifest and re-points the camera-stack matrix
-  repos at the infiniti-camera-port org, branch staging/16.0_crdroid
-  (Wave-2 branch cut; content replay lands in Waves 3-4).
+  repos at the infiniti-camera-port org, branch staging/16.0_crdroid, except
+  the two split camera device repos which track staging/16.0_crdroid-rearch.
 
   staging/16.0_crdroid shas at composition time (2026-07-03):
     android_frameworks_av                    2598b568888069f73551f4502181eccb21066215
@@ -80,12 +86,15 @@
   <project path="device/oneplus/sm8850-common" name="infiniti-camera-port/android_device_oneplus_sm8850-common"
            remote="github" revision="staging/16.0_crdroid" />
 
-  <!-- split camera device repos (task-8 topology; content lands in Task 12) -->
+  <!-- split camera device repos (task-8 topology). Lane A re-arch: the camera
+       glue was migrated here from the retired vendor_oplus_camera, so these
+       carry the -rearch branch (device/BoardConfig routing is on
+       device/oneplus/{infiniti,sm8850-common} @ staging/16.0_crdroid). -->
   <project path="device/oneplus/sm8850-common-camera" name="infiniti-camera-port/device_oneplus_sm8850-common-camera"
-           remote="github" revision="staging/16.0_crdroid" />
+           remote="github" revision="staging/16.0_crdroid-rearch" />
 
   <project path="device/oneplus/infiniti-camera" name="infiniti-camera-port/device_oneplus_infiniti-camera"
-           remote="github" revision="staging/16.0_crdroid" />
+           remote="github" revision="staging/16.0_crdroid-rearch" />
 
   <project path="hardware/oplus" name="infiniti-camera-port/android_hardware_oplus"
            remote="github" revision="staging/16.0_crdroid" />
@@ -97,8 +106,12 @@
   <project path="vendor/oneplus/sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_sm8850-common"
            remote="github" revision="staging/16.0_crdroid" />
 
-  <!-- oplus camera vendor (not in the base manifest; addition) -->
-  <project path="vendor/oplus/camera" name="infiniti-camera-port/vendor_oplus_camera"
+  <!-- Lane A re-arch: vendor_oplus_camera is RETIRED from the crDroid line
+       (kept frozen for the lineage-23.2 line; not referenced here). Its payload
+       relocates to the LineageOS-convention path vendor/oneplus/infiniti-camera,
+       served by the payload shell repo below (regen-from-dump; the extracted
+       bytes are gitignored and live untracked in this tree). -->
+  <project path="vendor/oneplus/infiniti-camera" name="infiniti-camera-port/proprietary_vendor_oneplus_infiniti-camera"
            remote="github" revision="staging/16.0_crdroid" />
 
   <!-- ==== non-matrix sm8850 device closure ==== -->
