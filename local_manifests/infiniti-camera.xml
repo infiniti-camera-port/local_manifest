@@ -1,65 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  infiniti camera-port local manifest.
+  infiniti camera-port local manifest - crDroid v3 staging composition.
 
-  Drop this file into .repo/local_manifests/ after `repo init` from
-  oneplus-sm8850-development/android, then run `repo sync`.
+  Drop this file into .repo/local_manifests/ after repo init from the crDroid
+  Android manifest, then run repo sync.
 
-  Re-points the camera stack at the infiniti-camera-port org.
+  Wave 2B pins infiniti-camera-port repos to staging/crdroid/v3 only, except
+  android_device_oneplus_sm8850-common which uses staging/crdroid/v3-infiniti
+  for the approved whole-blobset escape branch. Default branch promotion is
+  Marker-4 gated and intentionally not represented here.
 
-  v4.1 build: the v4.0 composition with ONE change — vendor/oplus/camera
-  pinned to 1c0fd46 (= v4.0's 4494224 + the 4-app OEM security /
-  private-space bloat drop: SafeCenter, FileManager, FileEncryption,
-  SecurityPermission out of the extract layer; cryptoeng App-Lock HAL +
-  libOplusSecurity.so kept). All other 9 repos identical to v4.0
-  (hardware/oplus branch tip e534ff5 is tree-identical to v4.0's
-  f08265c1 — stub commit + revert pair).
+  Retired v3 contract entries are intentionally absent:
+    - build/soong fork: replaced by manual patches/build-patches files.
+    - split device-camera repos: folded into device/vendor camera repos.
+    - legacy monolithic camera source repo: replaced by the camera-sm8850-common path.
+    - SettingsIntelligence fork: A21 dropped.
 -->
 <manifest>
 
+  <!-- ==== camera-stack matrix repos: infiniti-camera-port staging refs ==== -->
+
   <!-- frameworks -->
-  <remove-project name="LineageOS/android_frameworks_av" />
+  <remove-project name="crdroidandroid/android_frameworks_av" optional="true" />
+  <remove-project name="LineageOS/android_frameworks_av" optional="true" />
   <project path="frameworks/av" name="infiniti-camera-port/android_frameworks_av"
-           remote="github" revision="A16" groups="pdk,sysui-studio" />
+           remote="github" revision="staging/crdroid/v3" groups="pdk,sysui-studio" />
 
-  <remove-project name="LineageOS/android_frameworks_base" />
+  <remove-project name="crdroidandroid/android_frameworks_base" optional="true" />
+  <remove-project name="LineageOS/android_frameworks_base" optional="true" />
   <project path="frameworks/base" name="infiniti-camera-port/android_frameworks_base"
-           remote="github" revision="lineage-23.2" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
+           remote="github" revision="staging/crdroid/v3" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
 
-  <remove-project name="LineageOS/android_frameworks_native" />
+  <remove-project name="crdroidandroid/android_frameworks_native" optional="true" />
+  <remove-project name="LineageOS/android_frameworks_native" optional="true" />
   <project path="frameworks/native" name="infiniti-camera-port/android_frameworks_native"
-           remote="github" revision="lineage-23.2" groups="pdk" />
+           remote="github" revision="staging/crdroid/v3" groups="pdk" />
 
   <!-- sepolicy (sm8850 vendor) -->
-  <remove-project name="OnePlus-SM8850-Development/android_device_qcom_sepolicy_vndr" />
+  <remove-project name="OnePlus-SM8850-Development/android_device_qcom_sepolicy_vndr" optional="true" />
+  <remove-project name="crdroidandroid/android_device_qcom_sepolicy_vndr" optional="true" />
   <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
-           remote="github" revision="lineage-23.2-caf-sm8850" groups="qcom,kaanapali-vendor" />
+           remote="github" revision="staging/crdroid/v3" groups="kaanapali-vendor,qcom" />
 
   <!-- device trees + hardware -->
-  <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_infiniti" />
+  <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_infiniti" optional="true" />
+  <remove-project name="crdroidandroid/android_device_oneplus_infiniti" optional="true" />
   <project path="device/oneplus/infiniti" name="infiniti-camera-port/android_device_oneplus_infiniti"
-           remote="github" revision="lineage-23.2" />
+           remote="github" revision="staging/crdroid/v3" />
 
-  <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_sm8850-common" />
+  <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_sm8850-common" optional="true" />
+  <remove-project name="crDroid-OnePlus-SM8850/android_device_oneplus_sm8850-common" optional="true" />
   <project path="device/oneplus/sm8850-common" name="infiniti-camera-port/android_device_oneplus_sm8850-common"
-           remote="github" revision="lineage-23.2-infiniti" />
+           remote="github" revision="staging/crdroid/v3-infiniti" />
 
-  <remove-project name="OnePlus-SM8850-Development/android_hardware_oplus" />
+  <remove-project name="OnePlus-SM8850-Development/android_hardware_oplus" optional="true" />
+  <remove-project name="crdroidandroid/android_hardware_oplus" optional="true" />
   <project path="hardware/oplus" name="infiniti-camera-port/android_hardware_oplus"
-           remote="github" revision="A16" />
+           remote="github" revision="staging/crdroid/v3" />
 
-  <!-- proprietary blobs (camera blobs landed via extraction) -->
-  <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_infiniti" />
+  <remove-project name="crdroidandroid/android_packages_apps_Sandbox" optional="true" />
+  <project path="packages/apps/Sandbox" name="infiniti-camera-port/android_packages_apps_Sandbox"
+           remote="github" revision="staging/crdroid/v3" />
+
+  <!-- split v3 camera source repos -->
+  <project path="vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/vendor_oneplus_camera-sm8850-common"
+           remote="github" revision="staging/crdroid/v3" />
+
+  <project path="vendor/oneplus/camera-infiniti" name="infiniti-camera-port/vendor_oneplus_camera-infiniti"
+           remote="github" revision="staging/crdroid/v3" />
+
+  <!-- proprietary blobs -->
+  <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_infiniti" optional="true" />
+  <remove-project name="crdroidandroid/proprietary_vendor_oneplus_infiniti" optional="true" />
   <project path="vendor/oneplus/infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_infiniti"
-           remote="github" revision="lineage-23.2" />
+           remote="github" revision="staging/crdroid/v3" />
 
-  <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_sm8850-common" />
+  <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_sm8850-common" optional="true" />
+  <remove-project name="crdroidandroid/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <project path="vendor/oneplus/sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_sm8850-common"
-           remote="github" revision="lineage-23.2-infiniti" />
+           remote="github" revision="staging/crdroid/v3" />
 
-  <!-- oplus camera vendor (not in the base manifest; added) -->
-  <project path="vendor/oplus/camera" name="infiniti-camera-port/vendor_oplus_camera"
-           remote="github" revision="A16"
-           upstream="refs/heads/staging/attest+additional" />
+  <project path="proprietary/vendor/oneplus/camera-infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-infiniti"
+           remote="github" revision="staging/crdroid/v3" />
+
+  <project path="proprietary/vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-sm8850-common"
+           remote="github" revision="staging/crdroid/v3" />
+
+  <!-- ==== non-matrix sm8850 device closure ==== -->
+
+  <!-- kernel source for generated_kernel_includes; boot images still come from device prebuilts -->
+  <project path="kernel/oneplus/sm8850" name="kernel/common"
+           remote="aosp" revision="android16-6.12-lts" clone-depth="1" />
+
+  <!-- kernel prebuilts referenced by the current device trees -->
+  <project path="device/oneplus/infiniti-kernel" name="OnePlus-SM8850-Development/android_device_oneplus_infiniti-kernel"
+           remote="github" revision="refs/heads/lineage-23.2" />
+
+  <!-- sm8850 (kaanapali) audio-ar primary HAL -->
+  <project path="hardware/qcom-caf/sm8850/audio/primary-hal" name="OnePlus-SM8850-Development/android_hardware_qcom_audio-ar"
+           remote="github" revision="lineage-23.2-caf-sm8850" groups="kaanapali-audio,qcom" />
+
+  <!-- qcom-caf common: fork adds kaanapali board defs; keep full linkfile set + sm8850 pickup -->
+  <remove-project name="LineageOS/android_hardware_qcom-caf_common" optional="true" />
+  <project path="hardware/qcom-caf/common" name="OnePlus-SM8850-Development/android_hardware_qcom-caf_common"
+           remote="github" revision="refs/heads/lineage-23.2" groups="qcom">
+    <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+    <linkfile src="os_pickup_sepolicy_vndr.mk" dest="device/qcom/sepolicy_vndr/SEPolicy.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/msm8953/Android.bp" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sdm660/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sdm845/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8150/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8250/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8350/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8450/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8450-6.6/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8550/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8650/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8750/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8850/Android.bp" />
+  </project>
+
+  <!-- kaanapali thermal HAL plus the base thermal-legacy-um project removed by name -->
+  <remove-project name="LineageOS/android_hardware_qcom_thermal" optional="true" />
+  <project path="hardware/qcom-caf/thermal" name="OnePlus-SM8850-Development/android_hardware_qcom_thermal"
+           remote="github" revision="refs/heads/lineage-23.2" groups="kaanapali-vendor,qcom" />
+  <project path="hardware/qcom-caf/thermal-legacy-um" name="LineageOS/android_hardware_qcom_thermal"
+           remote="github" revision="lineage-23.2-legacy-um" groups="lanai-vendor,qcom" />
+
+  <!-- kaanapali usb (fork = LineageOS + kaanapali product bits) -->
+  <remove-project name="LineageOS/android_vendor_qcom_opensource_usb" optional="true" />
+  <project path="vendor/qcom/opensource/usb" name="OnePlus-SM8850-Development/android_vendor_qcom_opensource_usb"
+           remote="github" revision="refs/heads/lineage-23.2" groups="kaanapali-vendor,qcom" />
 
 </manifest>
