@@ -1,9 +1,9 @@
 # infiniti camera local manifest
 
 Addendum for the crDroid staging build that re-points the camera stack at the
-`infiniti-camera-port` org. Wave 2B tracks only `staging/crdroid/v3`, with the
-single approved `staging/crdroid/v3-infiniti` override for
-`android_device_oneplus_sm8850-common`.
+`infiniti-camera-port` org for infiniti, macan, macanc, and fairlady. Wave 2B
+tracks only `staging/crdroid/v3`, with the single approved
+`staging/crdroid/v3-infiniti` override for `android_device_oneplus_sm8850-common`.
 
 ## Use
 
