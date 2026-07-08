@@ -5,10 +5,9 @@
   Drop this file into .repo/local_manifests/ after repo init from the crDroid
   Android manifest, then run repo sync.
 
-  Wave 2B pins infiniti-camera-port repos to staging/crdroid/v3 only, except
-  android_device_oneplus_sm8850-common which uses staging/crdroid/v3-infiniti
-  for the approved whole-blobset escape branch. Default branch promotion is
-  Marker-4 gated and intentionally not represented here.
+  Wave 2B pins infiniti-camera-port repos to staging/crdroid/v3 or explicit
+  common v3-infiniti escape branches only. Default branch promotion is Marker-4
+  gated and intentionally not represented here.
 
   Retired v3 contract entries are intentionally absent:
     - build/soong fork: replaced by manual patches/build-patches files.
@@ -79,7 +78,7 @@
 
   <!-- split v3 camera source repos -->
   <project path="vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/vendor_oneplus_camera-sm8850-common"
-           remote="github" revision="staging/crdroid/v3" />
+           remote="github" revision="staging/crdroid/v3-infiniti" />
 
   <project path="vendor/oneplus/camera-infiniti" name="infiniti-camera-port/vendor_oneplus_camera-infiniti"
            remote="github" revision="staging/crdroid/v3" />
@@ -114,7 +113,7 @@
   <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <remove-project name="crdroidandroid/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <project path="vendor/oneplus/sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_sm8850-common"
-           remote="github" revision="staging/crdroid/v3" />
+           remote="github" revision="staging/crdroid/v3-infiniti" />
 
   <project path="proprietary/vendor/oneplus/camera-infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-infiniti"
            remote="github" revision="staging/crdroid/v3" />
@@ -129,7 +128,7 @@
            remote="github" revision="staging/crdroid/v3" />
 
   <project path="proprietary/vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-sm8850-common"
-           remote="github" revision="staging/crdroid/v3" />
+           remote="github" revision="staging/crdroid/v3-infiniti" />
 
   <!-- ==== non-matrix sm8850 device closure ==== -->
 
