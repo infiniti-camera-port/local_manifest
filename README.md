@@ -7,9 +7,10 @@ needed by the bring-up: 36 projects in total, made up of 26
 contains 34 optional removals so it can safely replace either crDroid or
 upstream OnePlus-SM8850 projects when present.
 
-Only `lineage_infiniti-bp4a-userdebug` has completed the validation path. The
-macan, macanc, and fairlady repositories are included to keep the split graph
-complete, but builds for those variants are deferred, not failed blockers.
+The promoted `infiniti` path has historical build and runtime evidence. The
+macan, macanc, and fairlady variants have not yet been freshly built or
+runtime-validated from this split graph. Their builds and static QA are queued
+in the approved all-device pass; do not infer a result for them yet.
 
 ## Quick start
 
@@ -19,6 +20,7 @@ directory:
 ```sh
 git lfs install
 git clone --depth=1 https://github.com/infiniti-camera-port/local_manifest.git
+git clone --depth=1 https://github.com/infiniti-camera-port/patches.git
 mkdir crdroid-16
 cd crdroid-16
 
@@ -70,21 +72,32 @@ credentials through a Git credential helper or a protected netrc file. Never
 put credentials in this manifest, a committed config file, a command line, or
 shell history.
 
-## Select the validated product
+## Apply the guarded build overlays and build
+
+The promoted source changes are already in the manifest repositories. Manifest
+consumers must not apply the portable `patch/` profile to this tree; it would
+apply those source changes twice. Only apply the guarded crDroid build overlays
+below.
 
 ```sh
+python3 ../patches/build-patches/apply-build-patches.py \
+  --repo-root "$PWD" --check-only
+
+# Apply mode: the same runner without --check-only.
+python3 ../patches/build-patches/apply-build-patches.py --repo-root "$PWD"
+
 source build/envsetup.sh
 lunch lineage_infiniti-bp4a-userdebug
+NINJA_ARGS='-k 0' WITH_SU=true mka bacon
 ```
 
-This only selects the product; start a build separately when that is your
-intent.
+`--check-only` validates overlay state; it does not compile Android. Review its
+report before running apply mode. The final command is the promoted build lane
+used by this project.
 
 ## Patch consumers
 
 This manifest points directly at the promoted organization repositories, where
-the crDroid v3 changes are already present. Do not apply the portable patch
-profile on top of a workspace synced with this manifest: doing both would apply
-the same source changes twice. The portable profile is for downstream trees
-that keep their original upstream project remotes instead of consuming this
-manifest.
+the crDroid v3 changes are already present. The portable profile is only for
+downstream trees that keep their original upstream project remotes instead of
+consuming this manifest.

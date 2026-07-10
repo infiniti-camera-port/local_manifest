@@ -10,8 +10,10 @@
   34 optional removals. The four shared common repositories use
   16.0-infiniti; every other infiniti-camera-port repository uses 16.0.
 
-  The infiniti product has been validated. The other device variants are
-  included for source closure, but their builds remain explicitly deferred.
+  The infiniti path has historical validation evidence. The other device
+  variants are included for source closure but are not yet freshly built or
+  runtime-validated; their builds and static QA are queued in the approved
+  all-device pass, so no result should be inferred yet.
 -->
 <manifest>
 
