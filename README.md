@@ -1,7 +1,7 @@
 # infiniti camera-port crDroid 16.0 manifest
 
 This repository publishes the complete promoted crDroid v3 split graph for the
-OnePlus 13 (`infiniti`). The local manifest selects all independent repositories
+OnePlus 15 (`infiniti`). The local manifest selects all independent repositories
 needed by the bring-up: 36 projects in total, made up of 26
 `infiniti-camera-port/*` projects and 10 external closure projects. It also
 contains 34 optional removals so it can safely replace either crDroid or
