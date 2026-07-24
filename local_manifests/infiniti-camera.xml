@@ -7,8 +7,9 @@
 
   This is the complete promoted composition: 36 projects, including 26
   infiniti-camera-port repositories and 10 external closure repositories, plus
-  34 optional removals. The four shared common repositories use
-  16.0-infiniti; every other infiniti-camera-port repository uses 16.0.
+  34 optional removals. The 14 in-scope infiniti build repositories track staging/m5-reconciled
+  (built + validated candidate 2026-07-24); the macan/macanc/fairlady sibling
+  variants remain on 16.0 pending the all-device pass.
 
   The infiniti path has historical validation evidence. The other device
   variants are included for source closure but are not yet freshly built or
@@ -23,29 +24,29 @@
   <remove-project name="crdroidandroid/android_frameworks_av" optional="true" />
   <remove-project name="LineageOS/android_frameworks_av" optional="true" />
   <project path="frameworks/av" name="infiniti-camera-port/android_frameworks_av"
-           remote="github" revision="16.0" groups="pdk,sysui-studio" />
+           remote="github" revision="staging/m5-reconciled" groups="pdk,sysui-studio" />
 
   <remove-project name="crdroidandroid/android_frameworks_base" optional="true" />
   <remove-project name="LineageOS/android_frameworks_base" optional="true" />
   <project path="frameworks/base" name="infiniti-camera-port/android_frameworks_base"
-           remote="github" revision="16.0" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
+           remote="github" revision="staging/m5-reconciled" groups="pdk-cw-fs,pdk-fs,sysui-studio" />
 
   <remove-project name="crdroidandroid/android_frameworks_native" optional="true" />
   <remove-project name="LineageOS/android_frameworks_native" optional="true" />
   <project path="frameworks/native" name="infiniti-camera-port/android_frameworks_native"
-           remote="github" revision="16.0" groups="pdk" />
+           remote="github" revision="staging/m5-reconciled" groups="pdk" />
 
   <!-- sepolicy (sm8850 vendor) -->
   <remove-project name="OnePlus-SM8850-Development/android_device_qcom_sepolicy_vndr" optional="true" />
   <remove-project name="crdroidandroid/android_device_qcom_sepolicy_vndr" optional="true" />
   <project path="device/qcom/sepolicy_vndr/sm8850" name="infiniti-camera-port/android_device_qcom_sepolicy_vndr"
-           remote="github" revision="16.0" groups="kaanapali-vendor,qcom" />
+           remote="github" revision="staging/m5-reconciled" groups="kaanapali-vendor,qcom" />
 
   <!-- device trees + hardware -->
   <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_infiniti" optional="true" />
   <remove-project name="crdroidandroid/android_device_oneplus_infiniti" optional="true" />
   <project path="device/oneplus/infiniti" name="infiniti-camera-port/android_device_oneplus_infiniti"
-           remote="github" revision="16.0" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_macan" optional="true" />
   <remove-project name="crdroidandroid/android_device_oneplus_macan" optional="true" />
@@ -65,23 +66,23 @@
   <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_sm8850-common" optional="true" />
   <remove-project name="crDroid-OnePlus-SM8850/android_device_oneplus_sm8850-common" optional="true" />
   <project path="device/oneplus/sm8850-common" name="infiniti-camera-port/android_device_oneplus_sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <remove-project name="OnePlus-SM8850-Development/android_hardware_oplus" optional="true" />
   <remove-project name="crdroidandroid/android_hardware_oplus" optional="true" />
   <project path="hardware/oplus" name="infiniti-camera-port/android_hardware_oplus"
-           remote="github" revision="16.0" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <remove-project name="crdroidandroid/android_packages_apps_Sandbox" optional="true" />
   <project path="packages/apps/Sandbox" name="infiniti-camera-port/android_packages_apps_Sandbox"
-           remote="github" revision="16.0" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <!-- split v3 camera source repos -->
   <project path="vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/vendor_oneplus_camera-sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <project path="vendor/oneplus/camera-infiniti" name="infiniti-camera-port/vendor_oneplus_camera-infiniti"
-           remote="github" revision="16.0" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <project path="vendor/oneplus/camera-macan" name="infiniti-camera-port/vendor_oneplus_camera-macan"
            remote="github" revision="16.0" />
@@ -96,7 +97,7 @@
   <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_infiniti" optional="true" />
   <remove-project name="crdroidandroid/proprietary_vendor_oneplus_infiniti" optional="true" />
   <project path="vendor/oneplus/infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_infiniti"
-           remote="github" revision="16.0" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_macan" optional="true" />
   <remove-project name="crdroidandroid/proprietary_vendor_oneplus_macan" optional="true" />
@@ -116,10 +117,10 @@
   <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <remove-project name="crdroidandroid/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <project path="vendor/oneplus/sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <project path="proprietary/vendor/oneplus/camera-infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-infiniti"
-           remote="github" revision="16.0" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <project path="proprietary/vendor/oneplus/camera-macan" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-macan"
            remote="github" revision="16.0" />
@@ -131,7 +132,7 @@
            remote="github" revision="16.0" />
 
   <project path="proprietary/vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="staging/m5-reconciled" />
 
   <!-- ==== non-matrix sm8850 device closure ==== -->
 
