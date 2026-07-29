@@ -1,5 +1,7 @@
 # Remote ledger
 
+This ledger records every configured remote by role; remote names are not authoritative.
+
 | Repository | Remote | URL | Role | Required | Purpose |
 |---|---|---|---|---|---|
 | android_frameworks_av | origin | https://github.com/infiniti-camera-port/android_frameworks_av.git | ours | required | Published camera-port contract branch. |
