@@ -39,16 +39,15 @@ preserve or remove local work.
 
 ## Branch contract
 
-Exactly these four shared common repositories use `16.0-infiniti`:
+Every `infiniti-camera-port/*` project in the manifest uses `16.0`.
 
-- `android_device_oneplus_sm8850-common`
-- `vendor_oneplus_camera-sm8850-common`
-- `proprietary_vendor_oneplus_sm8850-common`
-- `proprietary_vendor_oneplus_camera-sm8850-common`
-
-Every other `infiniti-camera-port/*` project in the manifest uses `16.0`. Do not
-flatten the four common rows to `16.0`, and do not move the other rows onto the
-common branch.
+The four shared common repositories (`android_device_oneplus_sm8850-common`,
+`vendor_oneplus_camera-sm8850-common`, `proprietary_vendor_oneplus_sm8850-common`,
+`proprietary_vendor_oneplus_camera-sm8850-common`) previously used
+`16.0-infiniti`; that branch was retired on 2026-08-05. `16.0` now points at the
+same commits, and the `16.0-infiniti` names are prune targets. Upstream
+OnePlus-SM8850-Development commonised the infiniti work at 16.0.9 and dropped
+its `-infiniti` branch; this rename follows it.
 
 ## Hydrate and verify proprietary inputs
 

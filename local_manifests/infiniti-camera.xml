@@ -8,7 +8,7 @@
   This is the complete promoted composition: 36 projects, including 26
   infiniti-camera-port repositories and 10 external closure repositories, plus
   34 optional removals. Every in-scope infiniti build repository now tracks its
-  contract branch - 16.0, or 16.0-infiniti for the shared sm8850 lanes -
+  contract branch - 16.0 -
   promoted from staging/16.0.9 after the device test passed on
   crDroidAndroid-16.0-20260731-infiniti-v12.11-r4.zip
   (sha256 08eaf7a602deb548efe81b1057e194dbf3c42d6da4394731d1da329493b71fd6).
@@ -70,7 +70,7 @@
   <remove-project name="OnePlus-SM8850-Development/android_device_oneplus_sm8850-common" optional="true" />
   <remove-project name="crDroid-OnePlus-SM8850/android_device_oneplus_sm8850-common" optional="true" />
   <project path="device/oneplus/sm8850-common" name="infiniti-camera-port/android_device_oneplus_sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="16.0" />
 
   <remove-project name="OnePlus-SM8850-Development/android_hardware_oplus" optional="true" />
   <remove-project name="crdroidandroid/android_hardware_oplus" optional="true" />
@@ -83,7 +83,7 @@
 
   <!-- split v3 camera source repos -->
   <project path="vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/vendor_oneplus_camera-sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="16.0" />
 
   <project path="vendor/oneplus/camera-infiniti" name="infiniti-camera-port/vendor_oneplus_camera-infiniti"
            remote="github" revision="16.0" />
@@ -121,7 +121,7 @@
   <remove-project name="OnePlus-SM8850-Development/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <remove-project name="crdroidandroid/proprietary_vendor_oneplus_sm8850-common" optional="true" />
   <project path="vendor/oneplus/sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="16.0" />
 
   <project path="proprietary/vendor/oneplus/camera-infiniti" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-infiniti"
            remote="github" revision="16.0" />
@@ -136,7 +136,7 @@
            remote="github" revision="16.0" />
 
   <project path="proprietary/vendor/oneplus/camera-sm8850-common" name="infiniti-camera-port/proprietary_vendor_oneplus_camera-sm8850-common"
-           remote="github" revision="16.0-infiniti" />
+           remote="github" revision="16.0" />
 
   <!-- ==== non-matrix sm8850 device closure ==== -->
 
